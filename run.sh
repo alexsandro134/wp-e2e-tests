@@ -75,7 +75,7 @@ while getopts ":a:RpS:b:B:s:gjWCJH:wzyl:cm:fiIUvxu:h" opt; do
       continue
       ;;
     R)
-      MOCHA_ARGS+="-R spec-xunit-reporter --reporter mochawesome --reporter-options=timestamp:'MMDDYYYYhhmmss' "
+      MOCHA_ARGS+="-R spec-xunit-reporter --reporter mochawesome --reporter-options timestamp='MMDDYYYYhhmmss' "
       continue
       ;;
     p)
