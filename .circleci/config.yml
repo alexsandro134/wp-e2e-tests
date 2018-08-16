@@ -38,3 +38,5 @@ jobs:
           path: reports/
       - store_artifacts:
           path: screenshots/
+      - store_artifacts:
+          path: mochawesome-report/
