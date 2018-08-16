@@ -34,7 +34,7 @@ jobs:
       - run: ./scripts/run-wrapper.sh
       - run:
           when: always
-          command: ||
+          command: |
             node ./scripts/merge-reports.js
       - store_test_results:
           path: reports/
