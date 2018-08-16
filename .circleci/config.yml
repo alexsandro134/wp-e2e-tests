@@ -40,4 +40,4 @@ jobs:
       - store_artifacts:
           path: screenshots/
       - store_artifacts:
-          path: mochawesome-report/
+          path: mochawesome-report/final/

@@ -11,6 +11,7 @@
   "defaultTestArgs": "-g -s $BROWSERSIZE",
   "scripts": {
     "lint": "eslint . --max-warnings=0",
+    "fixlint": "eslint . --fix",
     "precommitlint": "LIST=`git diff-index --name-only HEAD | grep js$`; if [ \"$LIST\" ]; then eslint $LIST --max-warnings=0; fi",
     "precommit": "node scripts/pre-commit-hook.js",
     "precommitcirclecivalidate": "./scripts/git-pre-commit-circleci-validate",
@@ -39,7 +40,7 @@
     "esformatter-semicolons": "^1.1.2",
     "esformatter-special-bangs": "^1.0.1",
     "eyes.selenium": "0.0.78",
-    "fs-extra": "0.22.1",
+    "fs-extra": "^7.0.0",
     "grunt": "^1.0.3",
     "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^2.3.0",
