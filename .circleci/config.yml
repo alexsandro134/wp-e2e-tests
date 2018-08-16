@@ -32,6 +32,7 @@ jobs:
           command: sudo apt install -y ffmpeg
       - run: ./scripts/randomize.sh specs
       - run: ./scripts/run-wrapper.sh
+      - run: ./scripts/merge-reports.js
       - store_test_results:
           path: reports/
       - store_artifacts:
