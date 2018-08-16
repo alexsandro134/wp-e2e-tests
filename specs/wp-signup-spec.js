@@ -19,7 +19,6 @@ import CreateYourAccountPage from '../lib/pages/signup/create-your-account-page.
 import SignupProcessingPage from '../lib/pages/signup/signup-processing-page.js';
 import CheckOutPage from '../lib/pages/signup/checkout-page';
 import CheckOutThankyouPage from '../lib/pages/signup/checkout-thankyou-page.js';
-import ViewBlogPage from '../lib/pages/signup/view-blog-page.js';
 import LoginPage from '../lib/pages/login-page';
 import MagicLoginPage from '../lib/pages/magic-login-page';
 import ReaderPage from '../lib/pages/reader-page';
@@ -75,7 +74,6 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 
 	describe( 'Sign up for a free WordPress.com site from the Jetpack new site page, and log in via a magic link @parallel @email', function() {
 		const blogName = dataHelper.getNewBlogName();
-		let newBlogAddress = '';
 		const expectedBlogAddresses = dataHelper.getExpectedFreeAddresses( blogName );
 		const emailAddress = dataHelper.getEmailAddress( blogName, signupInboxId );
 		let magicLoginLink;
@@ -94,9 +92,7 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 
 		step( 'Can see the "About" page, and enter some site information', async function() {
 			const aboutPage = await AboutPage.Expect( driver );
-			await aboutPage.enterSiteDetails( blogName, 'Electronics', {
-				showcase: true,
-			} );
+			await aboutPage.enterSiteDetails( blogName, 'Electronics' );
 			return await aboutPage.submitForm();
 		} );
 
@@ -114,7 +110,6 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 					expectedBlogAddresses.indexOf( actualAddress ) > -1,
 					`The displayed free blog address: '${ actualAddress }' was not the expected addresses: '${ expectedBlogAddresses }'`
 				);
-				newBlogAddress = actualAddress;
 				return await findADomainComponent.selectFreeAddress();
 			}
 		);
@@ -142,23 +137,14 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 			}
 		);
 
-		step( 'Can see expected Welcome message, URL, title, ', async function() {
-			const viewBlogPage = await ViewBlogPage.Expect( driver );
-			await viewBlogPage.waitForTrampolineWelcomeMessage();
-			let displayed = await viewBlogPage.isTrampolineWelcomeDisplayed();
-			assert.strictEqual( displayed, true, 'The trampoline welcome message is not displayed' );
-			let url = await viewBlogPage.urlDisplayed();
-			assert.strictEqual(
-				url,
-				'https://' + newBlogAddress + '/',
-				'The displayed URL on the view blog page is not as expected'
-			);
-			let title = await viewBlogPage.title();
-			return assert.strictEqual(
-				title,
-				blogName,
-				'The expected blog title is not displaying correctly'
-			);
+		step( 'Can then see the onboarding checklist', async function() {
+			const checklistPage = await ChecklistPage.Expect( driver );
+			const header = await checklistPage.headerExists();
+			const subheader = await checklistPage.subheaderExists();
+
+			assert( header, 'The checklist header does not exist.' );
+
+			return assert( subheader, 'The checklist subheader does not exist.' );
 		} );
 
 		step( 'Can log out and request a magic link', async function() {
