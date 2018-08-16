@@ -523,9 +523,6 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 
 		step( 'Can see the about page and accept defaults', async function() {
 			const aboutPage = await AboutPage.Expect( driver );
-			await aboutPage.enterSiteDetails( blogName, '', {
-				showcase: true,
-			} );
 			return await aboutPage.submitForm();
 		} );
 
@@ -697,7 +694,6 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 
 		step( 'Can see the about page and accept defaults', async function() {
 			const aboutPage = await AboutPage.Expect( driver );
-			await aboutPage.enterSiteDetails( blogName );
 			return await aboutPage.submitForm();
 		} );
 
@@ -1254,7 +1250,6 @@ describe( `[${ host }] Sign Up  (${ screenSize }, ${ locale })`, function() {
 
 		step( 'Can see the about page and accept defaults', async function() {
 			const aboutPage = await AboutPage.Expect( driver );
-			await aboutPage.enterSiteDetails( blogName );
 			return await aboutPage.submitForm();
 		} );
 
